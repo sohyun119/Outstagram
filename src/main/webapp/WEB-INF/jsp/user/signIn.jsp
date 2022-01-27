@@ -23,14 +23,26 @@
 		<c:import url="/WEB-INF/jsp/include/header.jsp" />
 		
 		<section class="content d-flex justify-content-center">
+		
+			<div class="mr-3">
+				<div class="d-flex">
+					<img class="imgBox" src="https://cdn.pixabay.com/photo/2017/03/24/07/28/instagram-2170420__340.png">
+					<img class="imgBox" src="https://cdn.pixabay.com/photo/2018/11/13/22/01/instagram-3814079__340.png">
+				</div>
+				<div class="d-flex">
+					<img class="imgBox" src="https://cdn.pixabay.com/photo/2018/11/13/22/01/instagram-3814079__340.png">
+					<img class="imgBox" src="https://cdn.pixabay.com/photo/2017/03/24/07/28/instagram-2170420__340.png">
+				</div>
+			</div>
+		
 			<div class="loginBox bg-white">
 				<h1 class="text-center mt-5">Outstagram</h1>
 				<div class="mx-3">
 				<form id="loginForm">
 					<input type="text" id="loginIdInput" class="form-control bg-light mt-5" placeholder="아이디">
 					<input type="password" id="passwordInput" class="form-control bg-light mt-3" placeholder="비밀번호">
-					<button type="submit" class="btn btn-primary btn-block my-3">로그인</button>
-					<div class="text-center"><a href="/user/signup_view">회원가입</a></div>
+					<button type="submit" class="btn btn-info btn-block my-3">로그인</button> <hr>
+					<div class="text-center">계정이 없으신가요?  <a href="/user/signup_view"> 가입하기</a></div>
 				</form>
 				</div>
 			</div>
@@ -45,6 +57,8 @@
 		$(document).ready(function(){
 			
 			$("#loginForm").on("submit",function(e){
+				
+				e.preventDefault(); // submit 이벤트 무효화 시키는 것
 				
 				var loginId = $("#loginIdInput").val();
 				var password = $("#passwordInput").val();
@@ -65,7 +79,7 @@
 					success:function(data){
 						if(data.result == "success"){
 							alert("로그인 성공!");
-							//location.href = "";
+							location.href = "/post/timeline_view";
 						}else{
 							alert("로그인 실패");
 						} 

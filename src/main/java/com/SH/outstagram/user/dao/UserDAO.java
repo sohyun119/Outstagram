@@ -21,5 +21,9 @@ public interface UserDAO {
 			, @Param("password") String password
 			);
 	
+	public int selectDuplicate(
+			@Param("loginId") String loginId
+			);
+	
 }
 

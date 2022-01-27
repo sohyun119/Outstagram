@@ -24,5 +24,16 @@ public class UserBO {
 		return userDAO.selectLoginUser(loginId, EncryptUtils.md5(password));
 	}
 	
+	public boolean isDuplicate(String loginId) {
+		int count = userDAO.selectDuplicate(loginId);
+		
+		if(count == 0) {
+			return false; // 중복되는게 없다.
+		}else {
+			return true;
+		}
+		
+	}
+	
 	
 }

@@ -23,17 +23,25 @@
 		<c:import url="/WEB-INF/jsp/include/header.jsp" />
 		
 		<section class="content d-flex justify-content-center">
+			
+			<div>
+				<img class="joinImg mr-3" src="https://cdn.pixabay.com/photo/2017/08/01/14/42/sea-2565956_1280.jpg">
+			</div>
+			
 			<div class="joinBox bg-white">
 				<h1 class="text-center mt-5">Outstagram</h1>
 				<div class="mx-3">
-					<h4 class="text-secondary mt-3 mx-3">친구들의 사진과 동영상을 보려면 가입하세요.</h4>
+					<h5 class="text-secondary mt-3">친구들의 사진과 동영상을 보려면 가입하세요.</h5>
 					<input type="text" id="emailInput" placeholder="이메일 주소" class="form-control bg-light mt-4">
 					<input type="text" id="nameInput" placeholder="성명" class="form-control bg-light mt-4">
-					<input type="text" id="loginIdInput" placeholder="아이디" class="form-control bg-light mt-4">
+					<div class="d-flex align-items-center mt-4">
+						<input type="text" id="loginIdInput" placeholder="아이디" class="form-control bg-light">
+						<button type="button" id="duplicateBtn" class="btn btn-light btn-sm text-secondary ml-2">중복 확인</button>
+					</div>
 					<input type="password" id="passwordInput" placeholder="비밀번호" class="form-control bg-light mt-4">
 					<input type="password" id="passwordConfirmInput" placeholder="비밀번호 확인" class="form-control bg-light mt-4">
-					<button type="button" id="joinBtn" class="btn btn-primary mt-3 btn-block">가입</button>
-					<div class="text-center mt-3"><a href="/user/signin_view">로그인</a></div>
+					<button type="button" id="joinBtn" class="btn btn-info mt-3 btn-block">가입</button> <hr>
+					<div class="text-center">계정이 있으신가요?<a href="/user/signin_view">로그인</a></div>
 				</div>
 			</div>
 		
@@ -46,12 +54,51 @@
 	<script>
 		$(document).ready(function(){
 			
+			var duplicate = "true";
+			
+			$("#duplicateBtn").on("click", function(){
+				
+				let loginId = $("#loginIdInput").val();
+				
+				if(loginId == ""){
+					alert("아이디를 입력해주세요.");
+					return;
+				}
+				
+				$.ajax({
+					type:"get",
+					url:"/user/is_duplicate_id",
+					data:{"loginId":loginId},
+					success:function(data){
+						if(data.is_duplicate == "true"){
+							duplicate = "true";
+							alert("아이디가 중복되었습니다.");
+						}
+						else{
+							duplicate = "false";
+							alert("사용가능한 아이디 입니다.");
+						}
+					},
+					error:function(){
+						alert("에러발생");
+					}
+				});
+			
+				
+			});
+			
+			// 중복검사를 했는지랑, 중복이 되었는지를 각각 다른 변수로 두어 관리해보기
+			$("#loginIdInput").on("input",function(){ // *** 아이디를 다시 수정하는 순간 다시 중복검사를 하게 만든다!!!!!!!
+				duplicate = "true";
+			});
+			
+			
 			$("#joinBtn").on("click", function(){
-				var email = $("#emailInput").val();
-				var name = $("#nameInput").val();
-				var loginId = $("#loginIdInput").val();
-				var password = $("#passwordInput").val();
-				var passwordConfirm = $("#passwordConfirmInput").val();
+				let email = $("#emailInput").val();
+				let name = $("#nameInput").val();
+				let loginId = $("#loginIdInput").val();
+				let password = $("#passwordInput").val();
+				let passwordConfirm = $("#passwordConfirmInput").val();
 				
 				if(email == ""){
 					alert("이메일을 입력해주세요.");
@@ -63,6 +110,10 @@
 				}
 				if(loginId == ""){
 					alert("아이디를 입력해주세요.");
+					return;
+				}
+				if(duplicate == "true"){
+					alert("아이디 중복검사를 해주세요.");
 					return;
 				}
 				if(password == ""){

@@ -9,12 +9,21 @@
 header{
 	width:1500px;
 	height:100px;
+	background-color:#E2E2E2;
 }
 .content{
 	width:1500px;
-	height:600px;
 	
 }
+.imgBox{
+	height:200px;
+	width:200px;
+}
+.joinImg{
+	height:600px;
+	width:400px;
+}
+
 
 .joinBox{
 	width:400px;
