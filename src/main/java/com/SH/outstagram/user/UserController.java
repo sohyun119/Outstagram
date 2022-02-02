@@ -32,7 +32,8 @@ public class UserController {
 		session.removeAttribute("userId");
 		session.removeAttribute("userLoginId");
 		session.removeAttribute("userName");
-		
+		  
+		// *** 바로 controller 의 url로 redirect이용하여 바로 !!!
 		return "redirect:/user/signin_view";
 		
 	}
