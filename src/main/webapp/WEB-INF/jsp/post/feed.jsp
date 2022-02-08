@@ -1,12 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>time line</title>
+<title>feed</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -17,30 +16,18 @@
 		<link rel="stylesheet" href="/static/css/style.css" type="text/css">
 </head>
 <body>
-	
+
 	<div id="wrap">
-		
 		<c:import url="/WEB-INF/jsp/include/header.jsp" />
-		<div><a href="/post/feed_view" class="text-whith">피드</a></div>
-		
-		<section class="content">
-			<c:forEach var="follow" items="${followList }">
-				<div>
-					<div>
-						<h4 class="bg-primary text-whith">${follow.userId }</h4>>
-					</div>
-					<div>
-						<img src="">
-					</div>
-				</div>
-			</c:forEach>
-		</section>
 	
+		<div>
+			<h2>${thisName }</h2>
 		
-		<c:import url="/WEB-INF/jsp/include/footer.jsp" />
+		</div>
+		
+		
 	
 	</div>
-	
 
 </body>
 </html>
