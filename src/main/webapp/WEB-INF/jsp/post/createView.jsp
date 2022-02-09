@@ -22,7 +22,7 @@
 	
 		<section class="d-flex justify-content-center mt-5">
 			<div class="w-50 h-50">
-				<div><textarea class="form-control"></textarea></div>
+				<div><textarea class="form-control" id="contentInput"></textarea></div>
 				<div class="d-flex justify-content-between mt-3">
 					<input type="file" id="fileInput">
 					<button type="button" id="saveBtn" class="btn btn-info">업로드</button>
@@ -34,6 +34,51 @@
 		
 	
 	</div>
+	
+	<script>
+		
+		$(document).ready(function(){
+			
+			$("#saveBtn").on("click",function(){
+				var content = $("#contentInput").val();
+				var imagePath = $("#fileInput")[0].files[0];
+				
+				if(imagePath == ""){
+					alert("사진을 업로드하세요.");
+				}
+				
+				var formData = new FormData();
+				formData.append("content", content);
+				formData.append("file", imagePath);
+				
+				$.ajax({
+					type:"post",
+					url:"/post/create",
+					data:formData,
+					enctype:"multipart/form-data",
+					processData:false,
+					contentType:false,
+					success:function(data){
+						if(data.result == "success"){
+							alert("업로드 완료");
+						}else{
+							alert("업로드 실패");
+						}
+					},
+					error:function(){
+						alert("에러발생");	
+					}
+				});
+				
+				
+			});
+			
+			
+		});
+	
+	
+	
+	</script>
 
 </body>
 </html>

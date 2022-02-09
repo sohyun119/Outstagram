@@ -6,16 +6,16 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import org.mybatis.logging.LoggerFactory;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartFile;
 
 // file 업로드하기 위한 클래스
 public class FileManagerService {
 
-	public final static String FILE_UPLOAD_PATH = "/Users/sohyun/Documents/Spring/upload/outstagramImage/";
+	public final static String FILE_UPLOAD_PATH = "/Users/sohyun/Documents/Spring/upload/image/";
 	
-	private static Logger logger = (Logger) LoggerFactory.getLogger(FileManagerService.class);
+	private static Logger logger = LoggerFactory.getLogger(FileManagerService.class);
 	
 	// 파일 저장
 	public static String saveFile(int userId, MultipartFile file) {

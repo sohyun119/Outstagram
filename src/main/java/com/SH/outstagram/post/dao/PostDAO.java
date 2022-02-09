@@ -15,4 +15,14 @@ public interface PostDAO {
 
 	public List<Post> selectFeedPostList(@Param("thisId") int thisId);
 	
+	public int insertPost(
+			@Param("userId") int userId
+			, @Param("userName") String userName
+			, @Param("content") String content
+			, @Param("imagePath") String filePath
+			);
+	
+	
+	
+	
 }
