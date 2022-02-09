@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.SH.outstagram.post.bo.PostBO;
 import com.SH.outstagram.post.model.Follow;
+import com.SH.outstagram.post.model.Post;
 
 @Controller
 @RequestMapping("/post")
@@ -48,8 +49,17 @@ public class PostController {
 		
 		model.addAttribute("thisName", thisName);
 		
+		List<Post> feedPost = postBO.feedPostList(thisId);
+		model.addAttribute("feedPost", feedPost);
+		
 		return "post/feed";
 		
+	}
+	
+	@GetMapping("/create_view")
+	public String createView() {
+		
+		return "post/createView";
 	}
 	
 	

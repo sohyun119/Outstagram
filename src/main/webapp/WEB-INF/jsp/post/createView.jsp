@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>feed</title>
+<title>createPost</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -20,15 +20,17 @@
 	<div id="wrap">
 		<c:import url="/WEB-INF/jsp/include/header.jsp" />
 	
-		<div>
-			<h2>${thisName }</h2>
-		</div>
-		<c:forEach var="feedPost" items="${feedPost }">
-			<div>
-				<img src="${feedPost.imagePath }">
+		<section class="d-flex justify-content-center mt-5">
+			<div class="w-50 h-50">
+				<div><textarea class="form-control"></textarea></div>
+				<div class="d-flex justify-content-between mt-3">
+					<input type="file" id="fileInput">
+					<button type="button" id="saveBtn" class="btn btn-info">업로드</button>
+				</div>
 			</div>
-		</c:forEach>
+		</section>
 		
+		<c:import url="/WEB-INF/jsp/include/footer.jsp" />
 		
 	
 	</div>

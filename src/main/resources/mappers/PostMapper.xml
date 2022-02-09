@@ -20,6 +20,21 @@
 		WHERE 
 			#{thisId} = `thisId`
 	</select>
+	
+	<select id="selectFeedPostList" parameterType="int" resultType="com.SH.outstagram.post.model.Post">
+		SELECT
+			`id`
+			, `userId`
+			, `userName`
+			, `imagePath`
+			, `content`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`post`
+		WHERE
+			#{thisId} = `userId`
+	</select>
 
 
 </mapper>
