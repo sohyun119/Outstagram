@@ -23,12 +23,13 @@
 		<section class="content d-flex justify-content-center">
 			<div class="feedBox mt-5">
 				<div class="d-flex">
-					<h2 class="text-secondary">${thisName }</h2>
-					<button type="button" class="btn btn-primary btn-sm ml-3">follow</button>
+					<h5 class="text-secondary">${thisLoginId }</h5>
+					<h5 class="text-secondary ml-3">${thisName }</h5>
+					<button type="button" class="btn btn-white btn-sm ml-3">follow</button>
 				</div>
 				<div class="mt-3">
-					<button type="button" class="btn btn-secondary">follow list</button>
-					<button type="button" class="btn btn-secondary">following list</button>
+					<button type="button" class="btn btn-secondary btn-sm">follow list</button>
+					<button type="button" class="btn btn-secondary btn-sm">following list</button>
 				</div>
 				<div class="d-flex mt-5 feedImgBox flex-wrap">
 					<c:forEach var="feedPost" items="${feedPost }">
@@ -40,7 +41,7 @@
 			</div>
 		</section>
 		
-	
+		<c:import url="/WEB-INF/jsp/include/footer.jsp" />
 	</div>
 
 </body>

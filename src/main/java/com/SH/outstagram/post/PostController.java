@@ -46,8 +46,11 @@ public class PostController {
 		HttpSession session = request.getSession();
 		int thisId = (Integer)session.getAttribute("userId");
 		String thisName = (String)session.getAttribute("userName");
+		String thisLoginId = (String)session.getAttribute("userLoginId");
 		
 		model.addAttribute("thisName", thisName);
+		model.addAttribute("thisLoginId", thisLoginId);
+		
 		
 		List<Post> feedPost = postBO.feedPostList(thisId);
 		model.addAttribute("feedPost", feedPost);
