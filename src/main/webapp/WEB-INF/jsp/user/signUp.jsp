@@ -28,7 +28,7 @@
 				<img class="joinImg mr-3" src="https://cdn.pixabay.com/photo/2017/08/01/14/42/sea-2565956_1280.jpg">
 			</div>
 			
-			<div class="joinBox bg-white">
+			<div class="joinBox bg-white border">
 				<h1 class="text-center mt-5">Outstagram</h1>
 				<div class="mx-3">
 					<h5 class="text-secondary mt-3">친구들의 사진과 동영상을 보려면 가입하세요.</h5>

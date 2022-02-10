@@ -4,16 +4,17 @@
 	width:1500px;
 	height:800px;
 	margin:auto;
-	background-color:#E2E2E2;
+	
 }
 header{
 	width:1500px;
 	height:100px;
-	background-color:#E2E2E2;
+}
+.headerBox{
+	width:800px;
 }
 .content{
 	width:1500px;
-	
 }
 .imgBox{
 	height:200px;
@@ -32,6 +33,16 @@ header{
 .loginBox{
 	width:400px;
 	height:400px;
+}
+.feedBox{
+	width:800px;
+}
+.feedImgBox{
+	width:800px;
+}
+.feedImg{
+	width:200px;
+	height:200px;
 }
 
 footer{

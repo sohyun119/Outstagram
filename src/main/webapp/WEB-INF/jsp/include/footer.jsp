@@ -2,5 +2,5 @@
     pageEncoding="UTF-8"%>
 
     	<footer>
-			<div class="text-center text-light mt-3">Copyright 2022. 이소현. All rights reserved.</div>
+			<div class="text-center text-secondary mt-5">Copyright 2022. 이소현. All rights reserved.</div>
 		</footer>

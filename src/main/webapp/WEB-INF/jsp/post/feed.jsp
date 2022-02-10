@@ -19,16 +19,26 @@
 
 	<div id="wrap">
 		<c:import url="/WEB-INF/jsp/include/header.jsp" />
-	
-		<div>
-			<h2>${thisName }</h2>
-		</div>
-		<c:forEach var="feedPost" items="${feedPost }">
-			<div>
-				<img src="${feedPost.imagePath }">
-			</div>
-		</c:forEach>
 		
+		<section class="content d-flex justify-content-center">
+			<div class="feedBox mt-5">
+				<div class="d-flex">
+					<h2 class="text-secondary">${thisName }</h2>
+					<button type="button" class="btn btn-primary btn-sm ml-3">follow</button>
+				</div>
+				<div class="mt-3">
+					<button type="button" class="btn btn-secondary">follow list</button>
+					<button type="button" class="btn btn-secondary">following list</button>
+				</div>
+				<div class="d-flex mt-5 feedImgBox flex-wrap">
+					<c:forEach var="feedPost" items="${feedPost }">
+						<div>
+							<img src="${feedPost.imagePath }" class="feedImg border border-white">
+						</div>
+					</c:forEach>
+				</div>
+			</div>
+		</section>
 		
 	
 	</div>

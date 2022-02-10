@@ -35,7 +35,7 @@
 				</div>
 			</div>
 		
-			<div class="loginBox bg-white">
+			<div class="loginBox bg-white border">
 				<h1 class="text-center mt-5">Outstagram</h1>
 				<div class="mx-3">
 				<form id="loginForm">
