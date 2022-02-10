@@ -29,7 +29,7 @@
 				<div class="d-flex justify-content-between my-3 mx-3">
 					<span class="img-icon"><i class="bi bi-card-image" id="imgBtn"></i></span>
 					<input type="file" id="fileInput" class="d-none">
-					<button type="button" id="saveBtn" class="btn btn-info">업로드</button>
+					<button type="button" id="saveBtn" class="btn btn-secondary">업로드</button>
 				</div>
 			</div>
 		</section>
