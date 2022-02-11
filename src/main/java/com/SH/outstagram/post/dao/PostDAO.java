@@ -22,6 +22,10 @@ public interface PostDAO {
 			, @Param("imagePath") String filePath
 			);
 	
+	public int selectIsFollow(
+			@Param("thisId") int thisId
+			, @Param("userId") int userId
+			);
 	
 	
 	

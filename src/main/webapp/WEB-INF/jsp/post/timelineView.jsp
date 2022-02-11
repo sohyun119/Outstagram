@@ -24,6 +24,7 @@
 		<c:import url="/WEB-INF/jsp/include/header.jsp" />
 		
 		<section class="content">
+			<a href="/post/other_feed_view?userId=8&&userName=소현">other</a>
 			<c:forEach var="follow" items="${followList }">
 				<div>
 					<div>

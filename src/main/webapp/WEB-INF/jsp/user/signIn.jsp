@@ -36,7 +36,7 @@
 			</div>
 		
 			<div class="loginBox bg-white border">
-				<h1 class="text-center mt-5">Outstagram</h1>
+				<h1 class="text-center mt-5 font-italic">Outstagram</h1>
 				<div class="mx-3">
 				<form id="loginForm">
 					<input type="text" id="loginIdInput" class="form-control bg-light mt-5" placeholder="아이디">

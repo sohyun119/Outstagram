@@ -29,7 +29,7 @@
 			</div>
 			
 			<div class="joinBox bg-white border">
-				<h1 class="text-center mt-5">Outstagram</h1>
+				<h1 class="text-center mt-5 font-italic">Outstagram</h1>
 				<div class="mx-3">
 					<h5 class="text-secondary mt-3">친구들의 사진과 동영상을 보려면 가입하세요.</h5>
 					<input type="text" id="emailInput" placeholder="이메일 주소" class="form-control bg-light mt-4">

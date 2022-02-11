@@ -69,6 +69,7 @@
 					success:function(data){
 						if(data.result == "success"){
 							alert("업로드 완료");
+							location.href = "/post/feed_view";
 						}else{
 							alert("업로드 실패");
 						}

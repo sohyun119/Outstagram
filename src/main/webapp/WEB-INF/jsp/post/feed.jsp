@@ -24,17 +24,28 @@
 		<section class="content d-flex justify-content-center">
 			<div class="feedBox mt-5">
 				<div class="d-flex">
-					<h5 class="text-secondary font-italic">${thisLoginId }</h5>
-					<h5 class="text-secondary ml-3 font-italic">${thisName }</h5>
-					<button type="button" class="btn btn-light btn-sm ml-3">follow</button>
+					<h5 class="d-none" id="feedUserId">${feedUserId }</h5>
+					<!--  <h5 class="text-secondary font-italic" id="feedUserLoginId">${feedUserLoginId }</h5>-->
+					<h5 class="text-secondary ml-3 font-italic" id="feedUserName">${feedUserName }</h5>
 				</div>
 				<div class="mt-3">
+					<!-- follow상태에 따른 버튼을 각기 -->
+					<c:choose>
+						<c:when test="${followState eq 0 }">
+							<button type="button" class="btn btn-primary btn-sm mr-3" id="followBtn">follow 하기</button>
+						</c:when>
+						<c:when test="${followState != 0 }">
+							<button type="button" class="btn btn-primary btn-sm mr-3" id="unfollowBtn">follow 취소</button>
+						</c:when>
+					</c:choose>
+					
 					<button type="button" class="btn btn-secondary btn-sm">follow list</button>
 					<button type="button" class="btn btn-secondary btn-sm">following list</button>
+					
 				</div>
-				<div class="d-flex mt-5 feedImgBox flex-wrap">
+				<div class="feedImgBox d-flex mt-5 flex-wrap">
 					<c:forEach var="feedPost" items="${feedPost }">
-						<div>
+						<div >
 							<img src="${feedPost.imagePath }" class="feedImg border border-white">
 						</div>
 					</c:forEach>
@@ -44,6 +55,69 @@
 		
 		<c:import url="/WEB-INF/jsp/include/footer.jsp" />
 	</div>
+	
+	<script>
+	
+		$(document).ready(function(){
+			var feedUserId = $("#feedUserId").text();
+			var feedUserName = $("#feedUserName").text();
+			
+			$("#followBtn").on("click",function(){ 
+				
+				
+				$.ajax({
+					type:"get",
+					url:"/post/follow",
+					data:{"feedUserId":feedUserId,"feedUserName":feedUserName},
+					success:function(data){
+						if(data.result == "success"){
+						}
+						else{
+						}
+					},
+					error:function(){
+						alert("에러발생");
+					}
+				});
+				
+			});
+			
+			
+			$("#unfollowBtn").on("click",function(){
+				
+				$.ajax({
+					type:"get",
+					url:"/post/unfollow",
+					data:{"feedUserId":feedUserId,"feedUserName":feedUserName},
+					success:function(data){
+						if(data.result == "success"){
+						}
+						else{
+						}
+					},
+					error:function(){
+						alert("에러발생");
+					}
+				});
+				
+			});
+			
+			
+			
+		});
+	
+	
+	
+	
+	
+	
+	</script>
+	
+	
+	
+	
+	
+	
 
 </body>
 </html>

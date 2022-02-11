@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,6 +19,7 @@ import com.SH.outstagram.post.bo.PostBO;
 @RestController
 @RequestMapping("/post")
 public class PostRestController {
+	// restcontroller 에서는 modle을 쓰지 않는다!!!!!!!
 	
 	@Autowired
 	private PostBO postBO;
@@ -45,6 +47,42 @@ public class PostRestController {
 		return map;
 		
 	}
+	
+	@GetMapping("/follow")
+	public Map<String, String> follow(
+			@RequestParam("feedUserId") int userId
+			, @RequestParam("feedUserName") String userName
+			, HttpServletRequest request
+			){
+	// if문 써서 delete or insert
+		HttpSession session = request.getSession();
+		
+		int thisId = (Integer)session.getAttribute("userId");
+		String thisName = (String)session.getAttribute("userName");
+		
+				
+		
+	}
+	
+	@GetMapping("/unfollow")
+	public Map<String, String> unfollow(
+			@RequestParam("feedUserId") int userId
+			, @RequestParam("feedUserName") String userName
+			, HttpServletRequest request
+			){
+		
+		HttpSession session = request.getSession();
+		
+		int thisId = (Integer)session.getAttribute("userId");
+		String thisName = (String)session.getAttribute("userName");
+		
+		
+		
+	}
+	
+	
+	
+	
 	
 	
 	

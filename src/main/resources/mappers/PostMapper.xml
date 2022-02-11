@@ -58,6 +58,14 @@
 	</insert>
 
 
+	<select id="selectIsFollow" parameterType="map" resultType="int">
+		SELECT
+			count(*)
+		FROM
+			`follow`
+		WHERE
+			`thisId`=#{thisId} AND `userId`=#{userId}
+	</select>
 
 
 

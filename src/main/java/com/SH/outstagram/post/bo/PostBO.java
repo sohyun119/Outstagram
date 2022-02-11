@@ -30,5 +30,10 @@ public class PostBO {
 		return postDAO.insertPost(userId, userName, content, filePath);
 	}
 	
+	// 팔로우 여부 확인
+	public int isFollow(int thisId, int userId) {
+		return postDAO.selectIsFollow(thisId, userId);
+	}
+	
 	
 }
