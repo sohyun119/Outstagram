@@ -17,8 +17,13 @@ public class PostBO {
 	@Autowired
 	private PostDAO postDAO;
 
-	public List<Follow> followingList(int thisId){
-		return postDAO.selectFollowing(thisId);
+	public List<Integer> timelineUserIdList(int thisId){
+		return postDAO.selectTimelineUserIdList(thisId);
+	}
+	
+	public List<Post> selectTimelinePost(int followingUserId){
+		
+		return postDAO.selectTimelinePost(followingUserId);
 	}
 	
 	public List<Post> feedPostList(int thisId){
@@ -26,6 +31,7 @@ public class PostBO {
 	}
 	
 	public int addPost(int userId, String userName, String content, MultipartFile file) {
+		// 파일경로로 DAO에 넘기기
 		String filePath = FileManagerService.saveFile(userId, file);
 		return postDAO.insertPost(userId, userName, content, filePath);
 	}
@@ -35,5 +41,20 @@ public class PostBO {
 		return postDAO.selectIsFollow(thisId, userId);
 	}
 	
+	public int addFollow(int thisId, String thisName, int userId, String userName) {
+		return postDAO.insertFollow(thisId, thisName, userId, userName);
+	}
+	
+	public int deleteFollow(int thisId, int userId) {
+		return postDAO.deleteFollow(thisId, userId);
+	}
+	
+	// feed 주인의 팔로우 팔로잉 리스트 확인
+	public List<String> followList(int feedUserId){
+		return postDAO.followUserNameList(feedUserId);
+	}
+	public List<String> followingList(int feedUserId){
+		return postDAO.followingUserNameList(feedUserId);
+	}
 	
 }

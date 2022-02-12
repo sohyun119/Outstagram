@@ -1,6 +1,8 @@
 package com.SH.outstagram.post;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -60,23 +62,64 @@ public class PostRestController {
 		int thisId = (Integer)session.getAttribute("userId");
 		String thisName = (String)session.getAttribute("userName");
 		
-				
+		int count = postBO.addFollow(thisId,thisName,userId,userName);	
+		Map<String, String> map = new HashMap<>();
+		
+		if(count == 1) {
+			map.put("result", "success");
+		}else {
+			map.put("result", "fail");
+		}
+		
+		return map;
 		
 	}
 	
 	@GetMapping("/unfollow")
 	public Map<String, String> unfollow(
 			@RequestParam("feedUserId") int userId
-			, @RequestParam("feedUserName") String userName
 			, HttpServletRequest request
 			){
 		
 		HttpSession session = request.getSession();
 		
 		int thisId = (Integer)session.getAttribute("userId");
-		String thisName = (String)session.getAttribute("userName");
 		
+		int count = postBO.deleteFollow(thisId, userId);
+		Map<String, String> map = new HashMap<>();
 		
+		if(count == 1) {
+			map.put("result", "success");
+		}
+		else {
+			map.put("result", "fail");
+		}
+		
+		return map;
+	}
+	
+	
+	@GetMapping("/followList")
+	public List<String> followList(
+			@RequestParam("feedUserId") int feedUserId
+			){
+		
+		List<String> followList = new ArrayList<>();
+		
+		followList = postBO.followList(feedUserId);
+		
+		return followList;
+	}
+	
+	@GetMapping("/followingList")
+	public List<String> followingList(
+			@RequestParam("feedUserId") int feedUserId){
+		
+		List<String> followingList = new ArrayList<>();
+		
+		followingList = postBO.followingList(feedUserId);
+		
+		return followingList;
 		
 	}
 	

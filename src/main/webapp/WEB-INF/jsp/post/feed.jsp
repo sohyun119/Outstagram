@@ -39,8 +39,8 @@
 						</c:when>
 					</c:choose>
 					
-					<button type="button" class="btn btn-secondary btn-sm">follow list</button>
-					<button type="button" class="btn btn-secondary btn-sm">following list</button>
+					<button type="button" class="btn btn-secondary btn-sm" id="followListBtn">follow list</button>
+					<button type="button" class="btn btn-secondary btn-sm" id="followingListBtn">following list</button>
 					
 				</div>
 				<div class="feedImgBox d-flex mt-5 flex-wrap">
@@ -59,11 +59,11 @@
 	<script>
 	
 		$(document).ready(function(){
-			var feedUserId = $("#feedUserId").text();
+			var feedUserId = $("#feedUserId").text(); // this일때는 저장이 안되고 있음
 			var feedUserName = $("#feedUserName").text();
+			//alert(feedUserId);
 			
 			$("#followBtn").on("click",function(){ 
-				
 				
 				$.ajax({
 					type:"get",
@@ -71,12 +71,15 @@
 					data:{"feedUserId":feedUserId,"feedUserName":feedUserName},
 					success:function(data){
 						if(data.result == "success"){
+							alert("팔로우 완료");
+							location.reload(); // 새로고침
 						}
 						else{
+							alert("문제 발생");
 						}
 					},
 					error:function(){
-						alert("에러발생");
+						alert("에러 발생");
 					}
 				});
 				
@@ -88,19 +91,65 @@
 				$.ajax({
 					type:"get",
 					url:"/post/unfollow",
-					data:{"feedUserId":feedUserId,"feedUserName":feedUserName},
+					data:{"feedUserId":feedUserId},
 					success:function(data){
 						if(data.result == "success"){
+							alert("팔로우 취소 완료");
+							location.reload();
 						}
 						else{
+							alert("문제 발생");
 						}
 					},
 					error:function(){
-						alert("에러발생");
+						alert("에러 발생");
 					}
 				});
 				
 			});
+			
+			
+			$("#followListBtn").on("click",function(){
+				var followNameList = "";
+				
+				$.ajax({
+					type:"get",
+					url:"/post/followList",
+					data:{"feedUserId":feedUserId},
+					success:function(data){
+						$(data).each(function(){
+							followNameList = followNameList + (this + "\n");
+						});
+						alert("=== 팔로우 목록 ===\n" + followNameList);
+					},
+					error:function(){
+						alert("에러 발생");
+					}
+				});
+				
+			});
+			
+			
+			$("#followingListBtn").on("click",function(){
+				var followingNameList = "";
+				
+				$.ajax({
+					type:"get",
+					url:"/post/followingList",
+					data:{"feedUserId":feedUserId},
+					success:function(data){
+						$(data).each(function(){
+							followingNameList += (this + "\n");
+						});
+						alert("== 팔로잉 목록 ==\n" + followingNameList);
+					},
+					error:function(){
+						alert("에러 발생");
+					}
+				});
+				
+			});
+			
 			
 			
 			
@@ -113,10 +162,7 @@
 	
 	</script>
 	
-	
-	
-	
-	
+
 	
 
 </body>

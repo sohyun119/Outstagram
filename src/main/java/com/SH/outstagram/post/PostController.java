@@ -1,5 +1,6 @@
 package com.SH.outstagram.post;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.SH.outstagram.post.bo.PostBO;
-import com.SH.outstagram.post.model.Follow;
 import com.SH.outstagram.post.model.Post;
 
 @Controller
@@ -24,7 +24,7 @@ public class PostController {
 	private PostBO postBO;
 
 	@GetMapping("/timeline_view")
-	public String timeline(
+	public String timeline( // 로그인한 사람이 팔로잉한 사람들의 게시물들 나열
 			HttpServletRequest request
 			, Model model
 			) {
@@ -32,8 +32,18 @@ public class PostController {
 		HttpSession session = request.getSession();
 		int thisId = (Integer)session.getAttribute("userId");
 		
-		List<Follow> followList = postBO.followingList(thisId);
-		model.addAttribute("followList", followList);
+		List<Integer> followingList = postBO.timelineUserIdList(thisId);
+		
+		List<Post> timelinePosts = postBO.selectTimelinePost(followingList);
+		
+		
+//		
+//		for(int followingUserId:followingList) {
+//			List<Post> userPost = postBO.selectTimelinePost(followingUserId);
+//			timelinePosts.add(post);
+//		}
+		
+		//model.addAttribute("followList", followList);
 		
 		return "post/timelineView";
 	}

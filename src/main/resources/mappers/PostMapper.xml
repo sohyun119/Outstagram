@@ -7,18 +7,30 @@
 <mapper namespace="com.SH.outstagram.post.dao.PostDAO">
 
 
-	<select id="selectFollowing" parameterType="int" resultType="com.SH.outstagram.post.model.Follow">
+	<select id="selectTimelineUserIdList" parameterType="int" resultType="int">
 		SELECT 
-			`id`
-			, `thisId`
-			, `thisName`
-			, `userId`
-			, `userName`
-			, `createdAt`
+			`userId`
 		FROM
 			`follow`
 		WHERE 
 			#{thisId} = `thisId`
+	</select>
+	
+	<select id="selectTimelinePost" parameterType="int" resultType="int">
+		SELECT
+			`id`
+			, `userId`
+			, `userName`
+			, `imagePath`
+			, `content`
+			, `createdAt`
+			, `updatedAt`
+		FORM
+			`post`
+		WHERE
+			`userId`=#{followingUserId}
+		ORDER BY `id`
+		LIMIT 200
 	</select>
 	
 	<select id="selectFeedPostList" parameterType="int" resultType="com.SH.outstagram.post.model.Post">
@@ -67,6 +79,50 @@
 			`thisId`=#{thisId} AND `userId`=#{userId}
 	</select>
 
+	<insert id="insertFollow" parameterType="map">
+		INSERT INTO `follow`
+		(
+			`thisId`
+			, `thisName`
+			, `userId`
+			, `userName`
+			, `createdAt`
+		)
+		VALUES
+		(
+			#{thisId}
+			, #{thisName}
+			, #{userId}
+			, #{userName}
+			, now()
+		)
+	</insert>
+	
+	<delete id="deleteFollow" parameterType="map">
+		DELETE FROM `follow`
+		WHERE `thisId`=#{thisId} AND `userId`=#{userId}
+	</delete>
+	
+	<select id="followUserNameList" parameterType="int" resultType="string">
+		SELECT
+			`thisName`
+		FROM 
+			`follow`
+		WHERE
+			#{feedUserId}=userId
+	
+	</select>
+	
+	<select id="followingUserNameList" parameterType="int" resultType="string">
+		SELECT
+			`userName`
+		FROM
+			`follow`
+		WHERE
+			#{feedUserId}=thisId
+	</select>
+	
+	
 
 
 </mapper>
