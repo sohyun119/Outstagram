@@ -16,7 +16,7 @@
 			#{thisId} = `thisId`
 	</select>
 	
-	<select id="selectTimelinePost" parameterType="int" resultType="int">
+	<select id="selectTimelinePost" parameterType="int" resultType="com.SH.outstagram.post.model.Post">
 		SELECT
 			`id`
 			, `userId`
@@ -25,12 +25,12 @@
 			, `content`
 			, `createdAt`
 			, `updatedAt`
-		FORM
+		FROM
 			`post`
 		WHERE
 			`userId`=#{followingUserId}
-		ORDER BY `id`
-		LIMIT 200
+		ORDER BY `id` DESC
+			
 	</select>
 	
 	<select id="selectFeedPostList" parameterType="int" resultType="com.SH.outstagram.post.model.Post">

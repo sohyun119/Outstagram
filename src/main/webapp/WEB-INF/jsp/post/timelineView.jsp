@@ -24,16 +24,29 @@
 		<c:import url="/WEB-INF/jsp/include/header.jsp" />
 		
 		<section class="content">
-			<a href="/post/other_feed_view?userId=8&&userName=소현">other</a>
-			<c:forEach var="follow" items="${followList }">
-				<div>
-					<div>
-						<h4 class="bg-primary text-whith">${follow.userId }</h4>>
-					</div>
-					<div>
-						<img src="">
+			<!-- <a href="/post/other_feed_view?userId=8&&userName=소현">other</a> -->
+			<c:forEach var="timelinePost" items="${timelinePosts }">
+			
+				<div class="d-flex justify-content-center mt-5">
+					<div class="postBox border">
+						<div class="bg-primary postHeader d-flex justify-content-between">
+								<div class="ml-3">
+								<a href="/post/other_feed_view?userId=${timelinePost.userId }&&userName=${timelinePost.userName}" class="text-white font-italic ">
+								${timelinePost.userName }</a>
+								</div>
+						</div>
+						<div class="d-flex justify-content-center mt-4">
+							<img src="${timelinePost.imagePath }"  class="postImgBox border border-white">
+						</div>
+						<div>
+							
+						</div>
+						<div>
+							<h6 class="mt-3 ml-3">${timelinePost.content }</h6>
+						</div>
 					</div>
 				</div>
+				
 			</c:forEach>
 		</section>
 	

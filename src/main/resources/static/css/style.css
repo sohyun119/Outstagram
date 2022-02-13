@@ -45,6 +45,19 @@ header{
 	height:200px;	
 	background-size: cover;
 }
+
+.postBox{
+	width:500px;
+}
+.postHeader{
+	height:30px;
+}
+.postImgBox{
+	width:430px;
+	height:380px;
+	background-size: cover;
+}
+
 .img-icon{
 	font-size:25px;
 }

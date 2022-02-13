@@ -8,7 +8,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.SH.outstagram.common.FileManagerService;
 import com.SH.outstagram.post.dao.PostDAO;
-import com.SH.outstagram.post.model.Follow;
 import com.SH.outstagram.post.model.Post;
 
 @Service
@@ -22,7 +21,7 @@ public class PostBO {
 	}
 	
 	public List<Post> selectTimelinePost(int followingUserId){
-		
+
 		return postDAO.selectTimelinePost(followingUserId);
 	}
 	
