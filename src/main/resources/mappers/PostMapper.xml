@@ -47,6 +47,21 @@
 		WHERE
 			#{thisId} = `userId`
 	</select>
+	
+	<select id="selectPost" parameterType="int" resultType="com.SH.outstagram.post.model.Post">
+		SELECT
+			`id`
+			, `userId`
+			, `userName`
+			, `imagePath`
+			, `content`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`post`
+		WHERE
+			#{postId} = `id`
+	</select>
 
 	<insert id="insertPost" parameterType="map">
 		INSERT INTO `post`
@@ -68,6 +83,11 @@
 			, now()
 		)
 	</insert>
+	
+	<delete id="deletePost" parameterType="int">
+		DELETE FROM `post`
+		WHERE `id`=#{postId}
+	</delete>
 
 
 	<select id="selectIsFollow" parameterType="map" resultType="int">

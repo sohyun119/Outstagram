@@ -29,10 +29,18 @@ public class PostBO {
 		return postDAO.selectFeedPostList(thisId);
 	}
 	
+	public Post selectPost(int postId) {
+		return postDAO.selectPost(postId);
+	}
+	
 	public int addPost(int userId, String userName, String content, MultipartFile file) {
 		// 파일경로로 DAO에 넘기기
 		String filePath = FileManagerService.saveFile(userId, file);
 		return postDAO.insertPost(userId, userName, content, filePath);
+	}
+	
+	public int deletePost(int postId) {
+		return postDAO.deletePost(postId);
 	}
 	
 	// 팔로우 여부 확인

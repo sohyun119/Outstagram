@@ -17,12 +17,16 @@ public interface PostDAO {
 
 	public List<Post> selectFeedPostList(@Param("thisId") int thisId);
 	
+	public Post selectPost(@Param("postId") int postId);
+	
 	public int insertPost(
 			@Param("userId") int userId
 			, @Param("userName") String userName
 			, @Param("content") String content
 			, @Param("imagePath") String filePath
 			);
+	
+	public int deletePost(@Param("postId") int postId);
 	
 	public int selectIsFollow(
 			@Param("thisId") int thisId

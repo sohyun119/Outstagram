@@ -31,10 +31,10 @@
 				<div class="mt-3">
 					<!-- follow상태에 따른 버튼을 각기 -->
 					<c:choose>
-						<c:when test="${followState eq 0 }">
+						<c:when test="${(followState eq 0) and (my_feed != true)}">
 							<button type="button" class="btn btn-primary btn-sm mr-3" id="followBtn">follow 하기</button>
 						</c:when>
-						<c:when test="${followState != 0 }">
+						<c:when test="${(followState != 0) and(my_feed != true)}">
 							<button type="button" class="btn btn-primary btn-sm mr-3" id="unfollowBtn">follow 취소</button>
 						</c:when>
 					</c:choose>
@@ -46,7 +46,9 @@
 				<div class="feedImgBox d-flex mt-5 flex-wrap">
 					<c:forEach var="feedPost" items="${feedPost }">
 						<div >
-							<img src="${feedPost.imagePath }" class="feedImg border border-white">
+							<a href="/post/detail_view?postId=${feedPost.id }">
+								<img src="${feedPost.imagePath }" class="feedImg border border-white">
+							</a>
 						</div>
 					</c:forEach>
 				</div>

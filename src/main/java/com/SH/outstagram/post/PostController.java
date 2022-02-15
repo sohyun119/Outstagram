@@ -46,6 +46,7 @@ public class PostController {
 			}
 		}
 		
+		
 		model.addAttribute("timelinePosts", timelinePosts);
 		
 		return "post/timelineView";
@@ -86,8 +87,10 @@ public class PostController {
 		String thisName = (String)session.getAttribute("userName");
 		String thisLoginId = (String)session.getAttribute("userLoginId");
 		
+		model.addAttribute("feedUserId", thisId);
 		model.addAttribute("feedUserName", thisName);
 		model.addAttribute("feedUserLoginId", thisLoginId);
+		model.addAttribute("my_feed",true);
 		
 		
 		List<Post> feedPost = postBO.feedPostList(thisId);
@@ -102,6 +105,23 @@ public class PostController {
 	public String createView() {
 		
 		return "post/createView";
+	}
+	
+	@GetMapping("/detail_view")
+	public String detailView(
+			@RequestParam("postId") int postId
+			, HttpServletRequest request
+			, Model model
+			) {
+		
+		HttpSession session = request.getSession();
+		int thisId = (Integer)session.getAttribute("userId");
+		
+		Post post = postBO.selectPost(postId);
+		model.addAttribute("post", post);
+		model.addAttribute("thisId", thisId);
+		
+		return "post/detailView";
 	}
 	
 	
