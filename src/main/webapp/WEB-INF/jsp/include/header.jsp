@@ -22,7 +22,7 @@
 	    					<a href="/post/create_view" class="nav-link text-dark"><i class="bi bi-plus-square"></i></a>
 	    				</li>
 	    				<li class="nav-item">
-	    					<a href="#" class="nav-link text-dark"><i class="bi bi-search"></i></a>
+	    					<a href="/user/search_view" class="nav-link text-dark"><i class="bi bi-search"></i></a>
 	    				</li>
 	    				<li class="nav-item">
 	    					<a href="/user/sign_out" class="nav-link text-dark">logout</a>

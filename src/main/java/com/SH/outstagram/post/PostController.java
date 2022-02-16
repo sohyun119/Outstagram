@@ -72,6 +72,13 @@ public class PostController {
 		List<Post> feedPost = postBO.feedPostList(userId);
 		model.addAttribute("feedPost", feedPost);
 		
+		// 해당 메소드를 통해 내 feed를 들어갈때 my feed인 것을 알려주는 변수 필요
+		boolean my_feed = false;
+		if(thisId == userId) {
+			my_feed = true;
+		}
+		model.addAttribute("my_feed", my_feed);
+		
 		return "post/feed";
 	}
 	

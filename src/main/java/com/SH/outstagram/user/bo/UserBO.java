@@ -35,5 +35,8 @@ public class UserBO {
 		
 	}
 	
+	public User searchUser(String userLoginId) {
+		return userDAO.searchUser(userLoginId);
+	}
 	
 }

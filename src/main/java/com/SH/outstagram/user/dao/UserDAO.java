@@ -25,5 +25,8 @@ public interface UserDAO {
 			@Param("loginId") String loginId
 			);
 	
+	
+	public User searchUser(@Param("userLoginId") String userLoginId);
+	
 }
 

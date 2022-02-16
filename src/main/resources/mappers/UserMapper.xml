@@ -50,7 +50,20 @@
 	
 	</select>
 	
-	
+	<select id="searchUser" parameterType="String" resultType="com.SH.outstagram.user.model.User">
+		SELECT
+			`id`
+			, `loginId`
+			, `password`
+			, `name`
+			, `email`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`user`
+		WHERE
+			`loginId` = #{userLoginId}	
+	</select>
 	
 	
 
