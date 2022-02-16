@@ -34,7 +34,9 @@
 							</div>
 							<c:if test="${post.userId eq thisId }">
 								<div>
-									<button type="button" class="btn mr-3" id="deleteBtn"><i class="bi bi-trash"></i></button>
+									<a href="#" class="btn mr-3 text-dark" data-toggle="modal" data-target="#exampleModalCenter"
+									><i class="bi bi-trash"></i>
+									</a>
 								</div>
 							</c:if>
 						</div>
@@ -65,6 +67,17 @@
 		<c:import url="/WEB-INF/jsp/include/footer.jsp" />
 	</div>
 	
+
+	<!-- Modal (뒤에 어둡게하고 창 띄우기)-->
+	<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered" role="document">
+	    <div class="modal-content">
+	      <div class="modal-body">
+	      	<button type="button" class="btn btn-info form-control" id="deleteBtn">삭제하기</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 	
 	<script>
 			

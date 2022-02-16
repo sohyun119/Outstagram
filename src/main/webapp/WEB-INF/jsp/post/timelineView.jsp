@@ -41,13 +41,13 @@
 						<div class="d-flex justify-content-center mt-4">
 							<img src="${timelinePost.imagePath }"  class="postImgBox border border-white">
 						</div>
-						<div class="mt-3 ml-4">
+						<div class="mt-3 ml-4 d-flex">
 							<c:choose>
 								<c:when test="">
-									<button type="button" id="likeBtn"><i class="bi bi-heart"></i></button>
+									<a class="likeBtn"><i class="bi bi-heart"></i></a>
 								</c:when>
 								<c:when test="">
-									<button type="button" id="likeCancleBtn"><i class="bi bi-heart-fill"></i></button>
+									<a class="unLikeBtn"><i class="bi bi-heart-fill"></i></a>
 								</c:when>
 							</c:choose>
 							

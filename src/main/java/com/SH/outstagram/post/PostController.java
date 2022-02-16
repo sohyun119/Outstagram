@@ -46,7 +46,6 @@ public class PostController {
 			}
 		}
 		
-		
 		model.addAttribute("timelinePosts", timelinePosts);
 		
 		return "post/timelineView";
