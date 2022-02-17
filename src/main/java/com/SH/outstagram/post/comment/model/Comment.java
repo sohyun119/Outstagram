@@ -1,14 +1,16 @@
-package com.SH.outstagram.post.like.model;
+package com.SH.outstagram.post.comment.model;
 
 import java.util.Date;
 
-public class Like {
+public class Comment {
 	
 	private int id;
 	private int postId;
 	private int userId;
 	private String userName;
+	private String comment;
 	private Date createdAt;
+	private Date updatedAt;
 	
 	public int getId() {
 		return id;
@@ -34,12 +36,25 @@ public class Like {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
+	public String getComment() {
+		return comment;
+	}
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
 	public Date getCreatedAt() {
 		return createdAt;
 	}
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
+	public Date getUpdatedAt() {
+		return updatedAt;
+	}
+	public void setUpdatedAt(Date updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+	
 	
 	
 

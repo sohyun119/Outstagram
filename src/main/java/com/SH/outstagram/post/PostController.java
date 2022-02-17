@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.SH.outstagram.post.bo.PostBO;
 import com.SH.outstagram.post.model.Post;
+import com.SH.outstagram.post.model.PostDetail;
 
 @Controller
 @RequestMapping("/post")
@@ -33,20 +34,12 @@ public class PostController {
 		int thisId = (Integer)session.getAttribute("userId");
 		
 		List<Integer> followingList = postBO.timelineUserIdList(thisId);
+		followingList.add(thisId);
 		
-		// 특정유저의 post들을 가져와서... 합친다? -> 여러 사람의 게시물을 섞어서 가져오지 못하겠음 ㅜ 
-		//										ㄴ 따라서 일단은 각 유저의 post를 최신순으로 20개씩까지만 가져와서 유저별로 배치 예정
-		
-		List<Post> timelinePosts = new ArrayList<>();
-		
-		for(int followingUserId:followingList) {
-			List<Post> userPost = postBO.selectTimelinePost(followingUserId);
-			for(int i=0; i<userPost.size(); i++) {
-				timelinePosts.add(userPost.get(i));
-			}
-		}
-		
-		model.addAttribute("timelinePosts", timelinePosts);
+		List<PostDetail> postDetailList = postBO.postDetail(followingList, thisId); // BO에서 다 처리
+	
+		model.addAttribute("postDetailList", postDetailList);
+		model.addAttribute("thisId", thisId);
 		
 		return "post/timelineView";
 	}

@@ -38,11 +38,12 @@
 							<button type="button" class="btn btn-primary btn-sm mr-3" id="unfollowBtn">follow 취소</button>
 						</c:when>
 					</c:choose>
-					
+					<!-- follow & following list -->
 					<button type="button" class="btn btn-secondary btn-sm" id="followListBtn">follow list</button>
 					<button type="button" class="btn btn-secondary btn-sm" id="followingListBtn">following list</button>
 					
 				</div>
+				<!-- feed post list -->
 				<div class="feedImgBox d-flex mt-5 flex-wrap">
 					<c:forEach var="feedPost" items="${feedPost }">
 						<div >

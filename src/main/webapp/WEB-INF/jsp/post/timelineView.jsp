@@ -25,37 +25,55 @@
 		<c:import url="/WEB-INF/jsp/include/header.jsp" />
 		
 		<section class="content">
-			<!-- <a href="/post/other_feed_view?userId=8&&userName=소현">other</a> -->
-			<c:forEach var="timelinePost" items="${timelinePosts }">
 			
+			<c:forEach var="postDetail" items="${postDetailList }">
 				<div class="d-flex justify-content-center mt-5">
 					<div class="postBox border">
+						<!-- post header -->
 						<div class=" postHeader d-flex justify-content-between mt-3">
-								<div class="ml-4">
+							<div class="ml-4">
 								<i class="bi bi-camera"></i>
-								<a href="/post/other_feed_view?userId=${timelinePost.userId }&&userName=${timelinePost.userName}" class="text-dark ml-1 mt-3">
-								${timelinePost.userName }</a>
+								<a href="/post/other_feed_view?userId=${postDetail.post.userId }&&userName=${postDetail.post.userName}" class="text-dark ml-1 mt-3">
+								${postDetail.post.userName }</a>
+							</div>
+							<c:if test="${postDetail.post.userId eq thisId }">
+								<div>
+									<a href="#" class="btn mr-3 text-dark" data-toggle="modal" data-target="#exampleModalCenter">
+									<i class="bi bi-trash"></i>
+									</a>
 								</div>
+							</c:if>
 						</div>
 						<hr>
+						<!-- post Image -->
 						<div class="d-flex justify-content-center mt-4">
-							<img src="${timelinePost.imagePath }"  class="postImgBox border border-white">
+							<img src="${postDetail.post.imagePath }"  class="postImgBox border border-white">
 						</div>
+						<!-- like -->
 						<div class="mt-3 ml-4 d-flex">
-							<c:choose>
-								<c:when test="">
-									<a class="likeBtn"><i class="bi bi-heart"></i></a>
-								</c:when>
-								<c:when test="">
-									<a class="unLikeBtn"><i class="bi bi-heart-fill"></i></a>
-								</c:when>
-							</c:choose>
+							<a href="#" class="likeBtn text-danger mr-2" data-post-id="${postDetail.post.id }">
+								<c:choose>
+									<c:when test="${postDetail.isLike == false}">
+										<h5><i class="bi bi-heart"></i></h5>
+									</c:when>
+									<c:when test="${postDetail.isLike == true}">
+										<h5><i class="bi bi-heart-fill"></i></h5>
+									</c:when>
+								</c:choose>
+							</a>
 							
-							<div>좋아요 개</div>
+							<div class="">좋아요 ${postDetail.likeCount }개</div>
 						</div>
+						
+						<!-- content -->
 						<div class="ml-4">
-							<div class="mt-2">${timelinePost.userName } : ${timelinePost.content }</div>
-							<small><fmt:formatDate value="${timelinePost.createdAt }" pattern="yyyy년 M월 d일" /></small>
+							<div class="mt-1">${postDetail.post.userName } - ${postDetail.post.content }</div>
+							<small><fmt:formatDate value="${postDetail.post.createdAt }" pattern="yyyy년 M월 d일" /></small>
+						</div>
+						
+						<!-- 댓글 -->
+						<div>
+							
 						</div>
 					</div>
 				</div>
@@ -67,6 +85,36 @@
 		<c:import url="/WEB-INF/jsp/include/footer.jsp" />
 	
 	</div>
+	
+	<script>
+		$(document).ready(function(){
+			
+			$(".likeBtn").on("click",function(e){
+				e.preventDefault();
+				var postId = $(this).data("post-id");
+				
+				$.ajax({
+					type:"get",
+					url:"/post/like",
+					data:{"postId":postId},
+					success:function(data){
+						
+						location.reload();
+					},
+					error:function(){
+						alert("좋아요 에러 발생");
+					}
+				});
+				
+			});
+			
+			
+			
+		});
+	
+	
+	
+	</script>
 	
 
 </body>

@@ -16,22 +16,6 @@
 			#{thisId} = `thisId`
 	</select>
 	
-	<select id="selectTimelinePost" parameterType="int" resultType="com.SH.outstagram.post.model.Post">
-		SELECT
-			`id`
-			, `userId`
-			, `userName`
-			, `imagePath`
-			, `content`
-			, `createdAt`
-			, `updatedAt`
-		FROM
-			`post`
-		WHERE
-			`userId`=#{followingUserId}
-		ORDER BY `id` DESC
-			
-	</select>
 	
 	<select id="selectFeedPostList" parameterType="int" resultType="com.SH.outstagram.post.model.Post">
 		SELECT
@@ -46,6 +30,7 @@
 			`post`
 		WHERE
 			#{thisId} = `userId`
+		ORDER BY `id` DESC
 	</select>
 	
 	<select id="selectPost" parameterType="int" resultType="com.SH.outstagram.post.model.Post">
