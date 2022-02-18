@@ -36,13 +36,14 @@ public class PostController {
 		List<Integer> followingList = postBO.timelineUserIdList(thisId);
 		followingList.add(thisId);
 		
-		List<PostDetail> postDetailList = postBO.postDetail(followingList, thisId); // BO에서 다 처리
+		List<PostDetail> postDetailList = postBO.postDetailList(followingList, thisId); // BO에서 다 처리
 	
 		model.addAttribute("postDetailList", postDetailList);
 		model.addAttribute("thisId", thisId);
 		
 		return "post/timelineView";
 	}
+	
 	
 	@GetMapping("/other_feed_view")
 	public String other_feed(
@@ -106,6 +107,7 @@ public class PostController {
 		return "post/createView";
 	}
 	
+	// feed 상세 화면
 	@GetMapping("/detail_view")
 	public String detailView(
 			@RequestParam("postId") int postId
@@ -116,9 +118,10 @@ public class PostController {
 		HttpSession session = request.getSession();
 		int thisId = (Integer)session.getAttribute("userId");
 		
-		Post post = postBO.selectPost(postId);
-		model.addAttribute("post", post);
+		PostDetail postDetail = postBO.selectPostDetail(postId, thisId);
+		
 		model.addAttribute("thisId", thisId);
+		model.addAttribute("postDetail", postDetail);
 		
 		return "post/detailView";
 	}

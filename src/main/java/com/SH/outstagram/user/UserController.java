@@ -48,7 +48,9 @@ public class UserController {
 	}
 
 	@GetMapping("/search_view")
-	public String searchUserView() {
+	public String searchUserView(Model model) {
+		model.addAttribute("isSearch",false);
+		
 		return "user/searchView";
 	}
 	
@@ -59,6 +61,7 @@ public class UserController {
 		
 		User searchUser = userBO.searchUser(userLoginId);
 		
+		model.addAttribute("isSearch",true);
 		model.addAttribute("searchUser", searchUser);
 		return "user/searchView";
 	}

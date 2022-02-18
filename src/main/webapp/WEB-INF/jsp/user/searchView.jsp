@@ -33,13 +33,13 @@
 				</form>
 				<div class="d-flex justify-content-center mt-3">
 					<c:choose>
-					<c:when test="${searchUser != null }">
+					<c:when test="${searchUser != null && (isSearch == true)}">
 						<span>검색 결과 - </span>
 						<a href="/post/other_feed_view?userId=${searchUser.id }&&userName=${searchUser.name}">
 						${searchUser.name }
 						</a>
 					</c:when>
-					<c:when test="${searchUser == null }">
+					<c:when test="${searchUser == null && (isSearch == true)}">
 						<span>검색 결과 없음</span>
 					</c:when>
 					</c:choose>

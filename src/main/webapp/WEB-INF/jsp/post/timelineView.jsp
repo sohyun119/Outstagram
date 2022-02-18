@@ -38,7 +38,7 @@
 							</div>
 							<c:if test="${postDetail.post.userId eq thisId }">
 								<div>
-									<a href="#" class="btn mr-3 text-dark" data-toggle="modal" data-target="#exampleModalCenter">
+									<a href="#" class="btn mr-3 text-dark" data-toggle="modal" data-target="#exampleModalCenter${postDetail.post.id }">
 									<i class="bi bi-trash"></i>
 									</a>
 								</div>
@@ -90,12 +90,23 @@
 						</div>
 						
 						<!-- 게시물 작성 날짜 -->
-						<div>
-							<small class="my-4 ml-4"><fmt:formatDate value="${postDetail.post.createdAt }" pattern="yyyy년 M월 d일" /></small>
+						<div class="ml-4 mt-2 mb-4">
+							<small><fmt:formatDate value="${postDetail.post.createdAt }" pattern="yyyy년 M월 d일" /></small>
 						</div>
 					</div>
 				</div>
 				
+				<!-- Modal (뒤에 어둡게하고 창 띄우기) : 반복문 안에 있을때는 아이디 중복되지 않게!!-->
+				<div class="modal fade" id="exampleModalCenter${postDetail.post.id }" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+				  <div class="modal-dialog modal-dialog-centered" role="document">
+				    <div class="modal-content">
+				      <div class="modal-body">
+				      	<button type="button" class="btn btn-info form-control deleteBtn" data-post-id="${postDetail.post.id }">삭제하기</button>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+							
 			</c:forEach>
 		</section>
 	
@@ -103,6 +114,8 @@
 		<c:import url="/WEB-INF/jsp/include/footer.jsp" />
 	
 	</div>
+	
+	
 	
 	<script>
 		$(document).ready(function(){
@@ -171,6 +184,27 @@
 					}
 				});
 			});
+			
+			// 본인 게시물 삭제 버튼
+			$(".deleteBtn").on("click", function(e){
+				e.preventDefault();
+				let postId = $(this).data("post-id");
+				
+				$.ajax({
+					type:"get",
+					url:"/post/delete",
+					data:{"postId":postId},
+					success:function(data){
+						alert("삭제 성공");
+						location.reload();
+					},
+					error:function(){
+						alert("에러발생");
+					}
+				});
+				
+			});
+			
 			
 		});
 	

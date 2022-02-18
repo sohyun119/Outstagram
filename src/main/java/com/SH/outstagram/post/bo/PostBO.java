@@ -30,7 +30,7 @@ public class PostBO {
 		return postDAO.selectTimelineUserIdList(thisId);
 	}
 	// 하나의 post에 대한 정보를 다 내포함 -> * 댓글과 좋아요를 게시물과 연관 짓기 위해서 (jsp에서 post를 불러온 뒤 불러오기가 힘듦)
-	public List<PostDetail> postDetail(List<Integer> followingList, int userId){
+	public List<PostDetail> postDetailList(List<Integer> followingList, int userId){
 		
 		List<PostDetail> postDetailList = new ArrayList<>();
 		
@@ -55,7 +55,26 @@ public class PostBO {
 		return postDetailList;
 		
 	}
+	
+	// feed 디테일 화면에서 사용할 리스트가 아닌 하나의 postDetail 에 관한 정보 불러오기
+	public PostDetail selectPostDetail(int postId, int userId) {
 		
+		PostDetail postDetail = new PostDetail();
+		
+		List<Comment> commentList = commentBO.getCommentList(postId);
+		int likeCount = likeBO.getLikeCount(postId);
+		boolean isLike = likeBO.getIsLike(postId, userId);
+		
+		postDetail.setPost(this.selectPost(postId));
+		postDetail.setCommentList(commentList);
+		postDetail.setLikeCount(likeCount);
+		postDetail.setIsLike(isLike);
+		
+		return postDetail;
+	}
+	
+	
+	
 	public List<Post> feedPostList(int thisId){
 		return postDAO.selectFeedPostList(thisId);
 	}

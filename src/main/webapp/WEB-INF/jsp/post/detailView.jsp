@@ -24,44 +24,76 @@
 		<c:import url="/WEB-INF/jsp/include/header.jsp" />
 		
 		<section class="content">
+			
 			<div class="d-flex justify-content-center mt-5">
 					<div class="postBox border">
+						<!-- post header -->
 						<div class=" postHeader d-flex justify-content-between mt-3">
 							<div class="ml-4">
 								<i class="bi bi-camera"></i>
-								<a href="/post/other_feed_view?userId=${post.userId }&&userName=${post.userName}" class="text-dark ml-1 mt-3">
-								${post.userName }</a>
+								<a href="/post/other_feed_view?userId=${postDetail.post.userId }&&userName=${postDetail.post.userName}" class="text-dark ml-1 mt-3">
+								${postDetail.post.userName }</a>
 							</div>
-							<c:if test="${post.userId eq thisId }">
+							<c:if test="${postDetail.post.userId eq thisId }">
 								<div>
-									<a href="#" class="btn mr-3 text-dark" data-toggle="modal" data-target="#exampleModalCenter"
-									><i class="bi bi-trash"></i>
+									<a href="#" class="btn mr-3 text-dark" data-toggle="modal" data-target="#exampleModalCenter">
+									<i class="bi bi-trash"></i>
 									</a>
 								</div>
 							</c:if>
 						</div>
 						<hr>
+						<!-- 게시물 이미지 -->
 						<div class="d-flex justify-content-center mt-4">
-							<img src="${post.imagePath }"  class="postImgBox border border-white">
+							<img src="${postDetail.post.imagePath }"  class="postImgBox border border-white">
 						</div>
-						<div class="mt-3 ml-4">
-							<c:choose>
-								<c:when test="">
-									<button type="button" id="likeBtn"><i class="bi bi-heart"></i></button>
-								</c:when>
-								<c:when test="">
-									<button type="button" id="likeCancleBtn"><i class="bi bi-heart-fill"></i></button>
-								</c:when>
-							</c:choose>
+						<!-- 좋아요 기능 -->
+						<div class="mt-3 ml-4 d-flex">
+							<a href="#" class="likeBtn text-danger mr-2">
+								<c:choose>
+									<c:when test="${postDetail.isLike == false}">
+										<h5><i class="bi bi-heart"></i></h5>
+									</c:when>
+									<c:when test="${postDetail.isLike == true}">
+										<h5><i class="bi bi-heart-fill"></i></h5>
+									</c:when>
+								</c:choose>
+							</a>
 							
-							<div>좋아요 개</div>
+							<div>좋아요 ${postDetail.likeCount }개</div>
 						</div>
+						
+						<!-- 게시글 글 -->
 						<div class="ml-4">
-							<div class="mt-2">${post.userName } : ${post.content }</div>
-							<small><fmt:formatDate value="${post.createdAt }" pattern="yyyy년 M월 d일" /></small>
+							<div>${postDetail.post.userName } - ${postDetail.post.content }</div>
+						</div>
+						<hr class="mx-4">
+						
+						<!-- 댓글 -->
+						<div class="mx-4">
+							
+							<c:forEach var="Comment" items="${postDetail.commentList }">
+								<div class="d-flex">
+									<div>${Comment.userName } - ${Comment.comment }</div>
+									<c:if test="${Comment.userId eq thisId }">
+										<a href="#" class="ml-3 deleteCommentBtn" data-comment-id="${Comment.id }"><small>삭제</small></a>
+									</c:if>
+								</div>
+							</c:forEach>
+							
+							<div class="d-flex mt-2">
+								<input type="text" class="form-control" id="commentInput">
+								<button type="button" class="btn btn-info commentBtn">게시</button>
+							</div>
+						</div>
+						
+						<!-- 게시물 작성 날짜 -->
+						<div class="ml-4 mt-2 mb-4">
+							<small><fmt:formatDate value="${postDetail.post.createdAt }" pattern="yyyy년 M월 d일" /></small>
 						</div>
 					</div>
 				</div>
+			
 		</section>
 		
 		<c:import url="/WEB-INF/jsp/include/footer.jsp" />
@@ -83,8 +115,9 @@
 			
 		$(document).ready(function(){
 			
-			$("#deleteBtn").on("click", function(){
-				var postId = ${post.id};
+			$("#deleteBtn").on("click", function(e){
+				e.preventDefault();
+				let postId = ${postDetail.post.id };
 				
 				$.ajax({
 					type:"get",
@@ -101,6 +134,60 @@
 				
 			});
 			
+			
+			$(".likeBtn").on("click", function(e){
+				e.preventDefault();
+				let postId = ${postDetail.post.id };
+				
+				$.ajax({
+					type:"get",
+					url:"/post/like",
+					data:{"postId":postId},
+					success:function(data){
+						location.reload();
+					},
+					error:function(){
+						alert("좋아요 에러 발생");
+					}
+				});
+			});
+			
+			
+			$(".commentBtn").on("click",function(e){
+				e.preventDefault();
+				let postId = ${postDetail.post.id };
+				let comment = $("#commentInput").val();
+				
+				$.ajax({
+					type:"post",
+					url:"/post/add_comment",
+					data:{"postId":postId,"comment":comment},
+					success:function(data){
+						location.reload();
+					},
+					error:function(){
+						alert("댓글 쓰기 에러");
+					}	
+				});
+			});
+			
+			
+			$(".deleteCommentBtn").on("click", function(e){
+				e.preventDefault();
+				let commentId = $(this).data("comment-id");
+				
+				$.ajax({
+					type:"get",
+					url:"/post/delete_comment",
+					data:{"commentId":commentId},
+					success:function(data){
+						location.reload();
+					},
+					error:function(){
+						alert("댓글 삭제 에러");
+					}
+				});
+			});
 			
 			
 		});
