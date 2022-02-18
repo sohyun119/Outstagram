@@ -76,7 +76,7 @@
 							
 							<c:forEach var="Comment" items="${postDetail.commentList }">
 								<div class="d-flex">
-									<div>${Comment.userName } - ${Comment.comment }</div>
+									<div><a href="/post/other_feed_view?userId=${Comment.userId }&&userName=${Comment.userName }" class="text-dark">${Comment.userName }</a> - ${Comment.comment }</div>
 									<c:if test="${Comment.userId eq thisId }">
 										<a href="#" class="ml-3 deleteCommentBtn" data-comment-id="${Comment.id }"><small>삭제</small></a>
 									</c:if>
