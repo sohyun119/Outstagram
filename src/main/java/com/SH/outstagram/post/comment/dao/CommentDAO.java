@@ -11,5 +11,17 @@ import com.SH.outstagram.post.comment.model.Comment;
 public interface CommentDAO {
 	
 	public List<Comment> selectCommentList(@Param("postId") int postId);
+	
+	
+	public int insertComment(
+			@Param("postId") int postId
+			, @Param("userId") int userId
+			, @Param("userName") String userName
+			, @Param("comment") String comment
+			);
+	
+	public int deleteComment(@Param("commentId") int commentId);
+	
+	
 
 }

@@ -45,11 +45,11 @@
 							</c:if>
 						</div>
 						<hr>
-						<!-- post Image -->
+						<!-- 게시물 이미지 -->
 						<div class="d-flex justify-content-center mt-4">
 							<img src="${postDetail.post.imagePath }"  class="postImgBox border border-white">
 						</div>
-						<!-- like -->
+						<!-- 좋아요 기능 -->
 						<div class="mt-3 ml-4 d-flex">
 							<a href="#" class="likeBtn text-danger mr-2" data-post-id="${postDetail.post.id }">
 								<c:choose>
@@ -62,18 +62,36 @@
 								</c:choose>
 							</a>
 							
-							<div class="">좋아요 ${postDetail.likeCount }개</div>
+							<div>좋아요 ${postDetail.likeCount }개</div>
 						</div>
 						
-						<!-- content -->
+						<!-- 게시글 글 -->
 						<div class="ml-4">
-							<div class="mt-1">${postDetail.post.userName } - ${postDetail.post.content }</div>
-							<small><fmt:formatDate value="${postDetail.post.createdAt }" pattern="yyyy년 M월 d일" /></small>
+							<div>${postDetail.post.userName } - ${postDetail.post.content }</div>
 						</div>
+						<hr class="mx-4">
 						
 						<!-- 댓글 -->
-						<div>
+						<div class="mx-4">
 							
+							<c:forEach var="Comment" items="${postDetail.commentList }">
+								<div class="d-flex">
+									<div>${Comment.userName } - ${Comment.comment }</div>
+									<c:if test="${Comment.userId eq thisId }">
+										<a href="#" class="ml-3 deleteCommentBtn" data-comment-id="${Comment.id }"><small>삭제</small></a>
+									</c:if>
+								</div>
+							</c:forEach>
+							
+							<div class="d-flex mt-2">
+								<input type="text" class="form-control" id="commentInput${postDetail.post.id }">
+								<button type="button" class="btn btn-info commentBtn" data-post-id="${postDetail.post.id }">게시</button>
+							</div>
+						</div>
+						
+						<!-- 게시물 작성 날짜 -->
+						<div>
+							<small class="my-4 ml-4"><fmt:formatDate value="${postDetail.post.createdAt }" pattern="yyyy년 M월 d일" /></small>
 						</div>
 					</div>
 				</div>
@@ -90,8 +108,8 @@
 		$(document).ready(function(){
 			
 			$(".likeBtn").on("click",function(e){
-				e.preventDefault();
-				var postId = $(this).data("post-id");
+				e.preventDefault(); // a태그의 특성을 없애주어 reload 시 스크롤이 그대로 있게 해줌
+				let postId = $(this).data("post-id");
 				
 				$.ajax({
 					type:"get",
@@ -108,7 +126,51 @@
 				
 			});
 			
+			$(".commentBtn").on("click",function(e){
+				e.preventDefault();
+				let postId = $(this).data("post-id");
+				let comment = $("#commentInput" + postId).val(); // 이러한 형태로 사용 가능 
+				
+				$.ajax({
+					type:"post",
+					url:"/post/add_comment",
+					data:{"postId":postId, "comment":comment},
+					success:function(data){
+						if(data.result == "fail"){
+							alert("댓글 입력 실패");
+						}
+						else{
+							location.reload();
+						}
+					},
+					error:function(){
+						alert("댓글 에러 발생");
+					}
+				});
+			});
 			
+			
+			$(".deleteCommentBtn").on("click",function(e){
+				e.preventDefault();
+				let commentId = $(this).data("comment-id");
+				
+				$.ajax({
+					type:"get",
+					url:"/post/delete_comment",
+					data:{"commentId":commentId},
+					success:function(data){
+						if(data.result == "fail"){
+							alert("댓글 삭제 실패");
+						}
+						else{
+							location.reload();
+						}
+					},
+					error:function(){
+						alert("댓글 에러 발생");
+					}
+				});
+			});
 			
 		});
 	
