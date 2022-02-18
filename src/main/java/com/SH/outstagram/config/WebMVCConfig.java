@@ -27,7 +27,7 @@ public class WebMVCConfig implements WebMvcConfigurer{
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(permissionInterceptor)
 		.addPathPatterns("/**")
-		.excludePathPatterns("/static/**", "images/**", "user/sign_out"); // 제외할 path
+		.excludePathPatterns("/static/**", "/images/**", "/user/sign_out", "/user/search", "/user/search_view"); // 제외할 path
 	}
 	
 	
