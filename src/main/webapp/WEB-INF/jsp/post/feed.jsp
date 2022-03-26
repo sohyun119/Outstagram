@@ -25,7 +25,6 @@
 			<div class="feedBox mt-5">
 				<div class="d-flex">
 					<h5 class="d-none" id="feedUserId">${feedUserId }</h5>
-					<!--  <h5 class="text-secondary font-italic" id="feedUserLoginId">${feedUserLoginId }</h5>-->
 					<h5 class="text-secondary ml-3 font-italic" id="feedUserName">${feedUserName }</h5>
 				</div>
 				<div class="mt-3">
