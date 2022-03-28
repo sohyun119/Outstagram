@@ -13,7 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 // file 업로드하기 위한 클래스
 public class FileManagerService {
 
-	public final static String FILE_UPLOAD_PATH = "/Users/sohyun/Documents/Spring/upload/image/";
+	public final static String FILE_UPLOAD_PATH = "/home/ec2-user/outstagram/upload/images/";
 	
 	private static Logger logger = LoggerFactory.getLogger(FileManagerService.class);
 	
