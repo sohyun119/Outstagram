@@ -29,7 +29,7 @@ public class PostController {
 			HttpServletRequest request
 			, Model model
 			) {
-		
+		// 
 		HttpSession session = request.getSession();
 		int thisId = (Integer)session.getAttribute("userId");
 		
