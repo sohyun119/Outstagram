@@ -114,4 +114,12 @@ public class PostBO {
 		return postDAO.followingUserNameList(feedUserId);
 	}
 	
+	public int followCount(int feedUserId) {
+		return postDAO.followCount(feedUserId);
+	}
+	public int followingCount(int feedUserId) {
+		return postDAO.followingCount(feedUserId);
+	}
+	
+	
 }

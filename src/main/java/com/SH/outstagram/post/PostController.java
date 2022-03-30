@@ -65,6 +65,12 @@ public class PostController {
 		List<Post> feedPost = postBO.feedPostList(userId);
 		model.addAttribute("feedPost", feedPost);
 		
+		int followCount = postBO.followCount(userId);
+		int followingCount = postBO.followingCount(userId);
+		
+		model.addAttribute("follwCount", followCount);
+		model.addAttribute("follwingCount", followingCount);
+		
 		// 해당 메소드를 통해 내 feed를 들어갈때 my feed인 것을 알려주는 변수 필요
 		boolean my_feed = false;
 		if(thisId == userId) {
@@ -87,11 +93,16 @@ public class PostController {
 		String thisName = (String)session.getAttribute("userName");
 		String thisLoginId = (String)session.getAttribute("userLoginId");
 		
+		int followCount = postBO.followCount(thisId);
+		int followingCount = postBO.followingCount(thisId);
+		
 		model.addAttribute("feedUserId", thisId);
 		model.addAttribute("feedUserName", thisName);
 		model.addAttribute("feedUserLoginId", thisLoginId);
 		model.addAttribute("my_feed",true);
 		
+		model.addAttribute("follwCount", followCount);
+		model.addAttribute("follwingCount", followingCount);
 		
 		List<Post> feedPost = postBO.feedPostList(thisId);
 		model.addAttribute("feedPost", feedPost);

@@ -25,7 +25,7 @@
 			<div class="feedBox mt-5">
 				<div class="d-flex">
 					<h5 class="d-none" id="feedUserId">${feedUserId }</h5>
-					<h5 class="text-secondary ml-3 font-italic" id="feedUserName">${feedUserName }</h5>
+					<h5 class="text-secondary ml-3 font-italic" id="feedUserName"><i class="bi bi-person-circle"></i> ${feedUserName }</h5>
 				</div>
 				<div class="mt-3">
 					<!-- follow상태에 따른 버튼을 각기 -->
@@ -38,8 +38,8 @@
 						</c:when>
 					</c:choose>
 					<!-- follow & following list -->
-					<button type="button" class="btn btn-secondary btn-sm" id="followListBtn">follow list</button>
-					<button type="button" class="btn btn-secondary btn-sm" id="followingListBtn">following list</button>
+					<button type="button" class="btn btn-light btn-sm" id="followListBtn">${follwCount } 팔로워</button>
+					<button type="button" class="btn btn-light btn-sm" id="followingListBtn">${follwingCount } 팔로잉</button>
 					
 				</div>
 				<!-- feed post list -->
