@@ -53,6 +53,13 @@ public interface PostDAO {
 			);
 	
 	
+	public int followCount(
+			@Param("feedUserId") int feedUserId
+			);
+	
+	public int followingCount(
+			@Param("feedUserId") int feedUserId
+			);
 	
 	
 }
